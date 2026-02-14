@@ -1,0 +1,51 @@
+/*1. BODY */
+body {
+    font-family: 'Roboto', Arial, sans-serif; 
+    background-color: #ffffff;
+    margin: 20px;
+}
+
+/* 2. JUDUL (H1)
+/* Font kembali normal, tetap biru dan di tengah */
+h1 {
+    text-align: center;
+    color: DodgerBlue;
+    font-size: 50px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  
+}
+
+/* 3. LINK / NAVIGASI  */
+a {
+    text-decoration: none;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+/*  4. TOMBOL & LAINYA  */
+b {
+    background-color: rgb(255, 0, 0);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+.tombol {
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Tabel biar rapi */
+table {
+    font-family: 'Roboto', Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
