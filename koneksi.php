@@ -1,7 +1,7 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = ""; // Kosongkan jika pakai Laragon/XAMPP standar
+$host = "145.79.11.226:3306";
+$user = "dzikri_kaka";
+$pass = "nxLAw7TB8KwkyWeK"; // Kosongkan jika pakai Laragon/XAMPP standar
 $db   = "latihan";
 $koneksi = mysqli_connect($host, $user, $pass, $db);
 
