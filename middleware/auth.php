@@ -10,8 +10,8 @@ function cek_sudah_login() {
     if (!isset($_SESSION['username'])) {
         echo "<script>
                 alert('Eits, Login dulu bos!');
-                // PERBAIKAN: Arahkan ke /Login.php (Huruf L Besar sesuai file kamu)
-                window.location.href = '/Login.php'; 
+                // PERBAIKAN: Arahkan ke /login.php 
+                window.location.href = '/login.php'; 
               </script>";
         exit;
     }
