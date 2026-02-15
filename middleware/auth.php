@@ -11,7 +11,7 @@ function cek_sudah_login() {
     if (!isset($_SESSION['username'])) {
         echo "<script>
                 alert('Eits, Login dulu bos!');
-                window.location.href = 'login.php';
+                window.location.href = '/index.php';
               </script>";
         exit;
     }
