@@ -1,36 +1,45 @@
 <?php
-session_start(); // Mulai sesi
-include 'koneksi.php'; // Panggil file koneksi database Anda
+// Bismillah dulu biar gak error
+session_start();
 
-// Cek apakah tombol login ditekan
-if (isset($_POST['login'])) {
+// Panggil file koneksi (pastikan filenya ada ya)
+include 'koneksi.php';
 
-    // 1. Ambil data dari form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+// CEK DULU: Kalau dia iseng buka halaman ini padahal udah login
+if(isset($_SESSION['username'])){
+    echo "<script>
+            alert('Woi ngapain kesini lagi? Kan udah login jotoshi KoH Jue koe');
+            window.location='index.php';
+          </script>";
+    exit;
+}
 
-    // 2. Mencegah SQL Injection (Pengamanan dasar)
-    // Pastikan variabel $koneksi sesuai dengan yang ada di file koneksi.php Anda
-    $username = mysqli_real_escape_string($koneksi, $username);
-    $password = mysqli_real_escape_string($koneksi, $password);
+// PROSES LOGIN (Kalau tombol dipencet)
+if(isset($_POST['gasken_login'])){
+    
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
 
-    // 3. Cek ke Database
-    // Ganti 'users' dengan nama tabel Anda jika berbeda
-    $data = mysqli_query($koneksi, "SELECT * FROM users WHERE BINARY username='$username' AND password='$password'");
+    // Cari data di database (semoga ketemu ya Allah)
+    $cari = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$user' AND password='$pass'");
+    
+    // Hitung ada berapa
+    $jumlah = mysqli_num_rows($cari);
 
-    // 4. Hitung jumlah data yang ditemukan
-    $cek = mysqli_num_rows($data);
-
-    if ($cek > 0) {
-        // Jika data ditemukan (Login Berhasil)
-        $_SESSION['username'] = $username;
+    if($jumlah > 0){
+        // ALHAMDULILLAH KETEMU!
+        $_SESSION['username'] = $user;
         $_SESSION['status'] = "login";
         
-        // Alihkan ke halaman dashboard/admin
-        echo "<script>alert('Login Berhasil!'); window.location='index.php';</script>";
+        echo "<script>
+                alert('Widihh Mantap! Berhasil Login maseeh. Selamat Datang!');
+                window.location='index.php';
+              </script>";
     } else {
-        // Jika data tidak ditemukan (Login Gagal)
-        $error_msg = "Username atau Password salah!";
+        // YAH SALAH :(
+        echo "<script>
+                alert('Waduh Salah Password Bos! Inget-inget lagi coba, jangan ngasal ');
+              </script>";
     }
 }
 ?>
@@ -38,48 +47,47 @@ if (isset($_POST['login'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login cuy gasken</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="buton.css">
+    <title>Login Dulu Cuy</title>
     <style>
-        /* Styling pesan error */
-        .error { color: red; font-size: 14px; margin-bottom: 10px; display: block; text-align: center;}
+        body { font-family: sans-serif; margin-top: 50px; }
+        input { padding: 10px; margin-bottom: 10px; width: 250px; }
+        button { padding: 10px 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <center>
-        <br><br><br>
+        <h2>SILAKAN MASUK DULU</h2>
+        <p>Isi data yang bener, jangan ngawur.</p>
+
+        <hr style="width: 50%;"> 
+        <br>
+
+        <form action="" method="POST">
+            
+            <label><b>Username:</b></label><br>
+            <input type="text" name="username" placeholder="Isi username mu..." required>
+            <br>
+
+            <label><b>Password:</b></label><br>
+            <input type="password" name="password" placeholder="Passwordnyaaaa..." required>
+            <br><br>
+
+            <button type="submit" name="gasken_login">
+                GAS MASUK 
+            </button>
+
+        </form>
+
+        <br>
+        <hr style="width: 50%;">
         
-        <table border="2" cellpadding="20" cellspacing="0" width="300" style="border-collapse: collapse;">
-            <tr>
-                <td bgcolor="#f0f0f0">
-                    <h2 align="center">Silakan Masuk</h2>
-                    
-                    <form action="" method="POST">
-                        
-                        <?php if(isset($error_msg)): ?>
-                            <span class="error"><?php echo $error_msg; ?></span>
-                        <?php endif; ?>
-
-                        <label>Username :</label><br>
-                        <input type="text" name="username" style="width: 100%; margin-bottom: 10px;" required><br>
-
-                        <label>Password :</label><br>
-                        <input type="password" name="password" style="width: 100%; margin-bottom: 10px;" required><br>
-
-                        <br>
-                        <button type="submit" name="login" style="width: 100%; cursor: pointer;">LOGIN</button>
-                    </form>
-
-                    <br>
-                    <center>
-                        Belum punya akun? <a href="daftar.php">Daftar akunnya disini</a>
-                    <a href="data_user.php">Kembali ke Menu Utama</a>
-                    </center>
-                </td>
-            </tr>
-        </table>
+        <p>
+            Belum punya akun? <a href="daftar.php"><b>Bikin Dulu Disini!</b></a>
+        </p>
+        <p>
+            <a href="index.php">⬅️ Kabur ke Halaman Depan</a>
+        </p>
 
     </center>
 

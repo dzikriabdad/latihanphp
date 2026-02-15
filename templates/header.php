@@ -19,11 +19,11 @@
         // kalau session ada isinya, berarti udah login
         if(isset($_SESSION['username'])) {
             ?>
-                <a href="auth/logout.php" onclick="return confirm('Yakin mau udahan bang?')">Keluar</a>
+                <a href="logout.php" onclick="return confirm('Yakin mau udahan bang?')">Keluar</a>
             <?php
         } else {
             ?>
-                <a href="auth/login.php">Masuk Dulu</a>
+                <a href="login.php">Masuk Dulu</a>
             <?php
         }
         ?>
